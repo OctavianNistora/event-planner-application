@@ -16,7 +16,7 @@ import org.example.services.UserService;
 public class AuthenticationController
 {
     @FXML
-    private Text registrationMessage;
+    private Text authenticationMessage;
 
     @FXML
     private PasswordField passwordField;
@@ -29,8 +29,10 @@ public class AuthenticationController
         try {
             Stage stage = new Stage();
             Parent registerRoot = FXMLLoader.load(getClass().getClassLoader().getResource("register.fxml"));
-            stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(new Scene(registerRoot, 600, 400));
+            stage.setTitle("Registration");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(authenticationMessage.getScene().getWindow());
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,10 +52,9 @@ public class AuthenticationController
                 user = UserService.findUser(usernameField.getText(), passwordField.getText());
                 nameUser = user.getFirstName() + " " + user.getLastName();
             }
-            Stage currentStage = (Stage) registrationMessage.getScene().getWindow();
+            Stage currentStage = (Stage) authenticationMessage.getScene().getWindow();
             Stage newStage = new Stage();
             currentStage.close();
-            //Parent loginRoot = FXMLLoader.load
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view-events.fxml"));
             newStage.setScene(new Scene(loader.load(), 600, 400));
             ViewEventController controller = loader.getController();
@@ -61,7 +62,7 @@ public class AuthenticationController
             newStage.setTitle(nameUser + " | View Events");
             newStage.show();
         } catch (InvalidCredentialsException e) {
-            registrationMessage.setText(e.getMessage());
+            authenticationMessage.setText(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
