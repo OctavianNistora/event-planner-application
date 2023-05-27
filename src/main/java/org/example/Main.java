@@ -1,8 +1,36 @@
 package org.example;
-public class Main
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import org.example.services.FileSystemService;
+import org.example.services.UserService;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class Main extends Application
 {
     public static void main(String[] args)
     {
-        System.out.println("Hello world!");
+        launch(args);
+    }
+
+    public void start(Stage primaryStage) throws Exception
+    {
+        initDirectory();
+        UserService.initDatabase();
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("authentication.fxml"));
+        primaryStage.setTitle("Authentication");
+        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.show();
+    }
+
+    private void initDirectory() {
+        Path applicationHomePath = FileSystemService.APPLICATION_HOME_PATH;
+        if (!Files.exists(applicationHomePath))
+            applicationHomePath.toFile().mkdirs();
     }
 }
