@@ -17,13 +17,27 @@ import static org.example.services.FileSystemService.getPathToFile;
 public class UserService
 {
     private static ObjectRepository<User> userRepository;
+    private static Nitrite database;
 
     public static void initDatabase() {
-        Nitrite database = Nitrite.builder()
+        database = Nitrite.builder()
                 .filePath(getPathToFile("user.db").toFile())
                 .openOrCreate("test", "test");
 
         userRepository = database.getRepository(User.class);
+    }
+
+    public static void initTestingDatabase() {
+        database = Nitrite.builder()
+                .filePath(getPathToFile("testUser.db").toFile())
+                .openOrCreate("test", "test");
+
+        userRepository = database.getRepository(User.class);
+    }
+
+    public static void closeDatabase() {
+        database.close();
+        userRepository = null;
     }
 
     public static void addUser(String firstName, String lastName, String email, String username, String password, String gender) throws UsernameAlreadyExistsException, NullFieldException {
