@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Register"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<GridPane alignment="CENTER" prefHeight="250.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.RegistrationController">
+  <columnConstraints>
+    <ColumnConstraints />
+    <ColumnConstraints prefWidth="200.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+  </rowConstraints>
+   <children>
+      <Label text="First name : " />
+      <TextField fx:id="firstNameField" GridPane.columnIndex="1" />
+      <Label text="Last name : " GridPane.rowIndex="1" />
+      <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label text="Email : " GridPane.rowIndex="2" />
+      <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label text="Username : " GridPane.rowIndex="3" />
+      <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Label text="Password" GridPane.rowIndex="4" />
+      <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Label text="Gender : " GridPane.rowIndex="5" />
+      <ChoiceBox fx:id="gender" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Button mnemonicParsing="false" onAction="#handleRegisterAction" text="Create Account" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Text fx:id="registrationMessage" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+   </children>
+</GridPane>

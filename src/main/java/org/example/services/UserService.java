@@ -3,6 +3,7 @@ package org.example.services;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
 import org.example.exceptions.InvalidCredentialsException;
+import org.example.exceptions.NullFieldException;
 import org.example.exceptions.UsernameAlreadyExistsException;
 import org.example.model.User;
 
@@ -19,15 +20,19 @@ public class UserService
 
     public static void initDatabase() {
         Nitrite database = Nitrite.builder()
-                .filePath(getPathToFile("registration-example.db").toFile())
+                .filePath(getPathToFile("user.db").toFile())
                 .openOrCreate("test", "test");
 
         userRepository = database.getRepository(User.class);
     }
 
-    public static void addUser(String firstName, String lastName, String email, String username, String password, String gender) throws UsernameAlreadyExistsException {
+    public static void addUser(String firstName, String lastName, String email, String username, String password, String gender) throws UsernameAlreadyExistsException, NullFieldException {
+        if (firstName == null || lastName == null || email == null || username == null || password == null || gender == null)
+        {
+            throw new NullFieldException();
+        }
         checkUserDoesNotAlreadyExist(username);
-        userRepository.insert(new User(firstName, lastName, email, username, password, gender));
+        userRepository.insert(new User(firstName, lastName, email, username, encodePassword(username, password), gender));
     }
 
     public static User findUser(String username, String password) throws InvalidCredentialsException
