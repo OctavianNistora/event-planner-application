@@ -3,16 +3,19 @@ package org.example.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.example.model.Event;
 import org.example.model.User;
 import org.example.services.EventService;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ViewEventController
@@ -50,7 +53,7 @@ public class ViewEventController
         System.out.println("User specific action");
     }
 
-    public void handleOnEnter()
+    public void handleOnKeyTyped()
     {
         ArrayList<Event> filteredEvents = new ArrayList<Event>(events);
         for (Event event : events)
@@ -65,10 +68,23 @@ public class ViewEventController
         eventList.setItems(FXCollections.observableArrayList(filteredEvents));
     }
 
-    public void handleOnClick(MouseEvent event)
+    public void handleOnClick(MouseEvent mouseEvent)
     {
-        if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
-            System.out.println(eventList.getSelectionModel().getSelectedItem());
+        if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+            Event event = eventList.getSelectionModel().getSelectedItem();
+            try {
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("event-details.fxml"));
+                stage.setScene(new Scene(loader.load(), 600, 400));
+                EventDetailsController controller = loader.getController();
+                controller.initEvent(event);
+                stage.setTitle(event + " | Event details");
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.initOwner(eventList.getScene().getWindow());
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
