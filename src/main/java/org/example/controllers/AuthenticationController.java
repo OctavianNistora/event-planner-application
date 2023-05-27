@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.example.exceptions.InvalidCredentialsException;
+import org.example.model.User;
+import org.example.services.UserService;
 
 public class AuthenticationController
 {
@@ -36,14 +39,29 @@ public class AuthenticationController
 
     public void handleLoginAction()
     {
-        try
-        {
+        try {
+            User user;
+            String nameUser;
+            if (usernameField.getText().equals("admin") && passwordField.getText().equals("admin")) {
+                user = null;
+                nameUser = "ADMIN";
+            }
+            else {
+                user = UserService.findUser(usernameField.getText(), passwordField.getText());
+                nameUser = user.getFirstName() + " " + user.getLastName();
+            }
             Stage currentStage = (Stage) registrationMessage.getScene().getWindow();
             Stage newStage = new Stage();
             currentStage.close();
-            Parent loginRoot = FXMLLoader.load(getClass().getClassLoader().getResource("view-events.fxml"));
-            newStage.setScene(new Scene(loginRoot, 600, 400));
+            //Parent loginRoot = FXMLLoader.load
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view-events.fxml"));
+            newStage.setScene(new Scene(loader.load(), 600, 400));
+            ViewEventController controller = loader.getController();
+            controller.initUser(user);
+            newStage.setTitle(nameUser + " | View Events");
             newStage.show();
+        } catch (InvalidCredentialsException e) {
+            registrationMessage.setText(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -8,7 +8,7 @@
    <children>
       <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="20.0" minWidth="200.0" prefHeight="40.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="UserSpecific" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleUserSpecificAction" prefWidth="300.0" text="User Specific" HBox.hgrow="ALWAYS">
+            <Button fx:id="userSpecific" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleUserSpecificAction" prefWidth="300.0" text="User Specific" HBox.hgrow="ALWAYS">
                <padding>
                   <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                </padding></Button>
@@ -21,7 +21,12 @@
                </padding></Button>
          </children>
       </HBox>
-      <TextField fx:id="searchField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onEnter" prefHeight="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
-      <ListView fx:id="eventList" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
+      <TextField fx:id="searchField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleOnEnter" prefHeight="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+      <ListView fx:id="eventList" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
+      <HBox alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button fx:id="addEventButton" alignment="CENTER_RIGHT" disable="true" mnemonicParsing="false" onAction="#handleAddEvent" prefHeight="40.0" text="Add Event" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
