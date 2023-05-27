@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" prefHeight="250.0" prefWidth="350.0" vgap="2.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.AddEventController">
+    <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints prefWidth="200.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints prefHeight="30.0" />
+        <RowConstraints prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+    </rowConstraints>
+    <children>
+        <Label text="Event name : " />
+        <TextField fx:id="nameField" GridPane.columnIndex="1" />
+        <Label text="Description name : " GridPane.rowIndex="1" />
+        <TextField fx:id="descriptionField" prefHeight="90.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="3" />
+        <Label text="Tags : " GridPane.rowIndex="4" />
+        <TextField fx:id="tagsField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Button mnemonicParsing="false" onAction="#handleRegisterAction" text="Add Event" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Text fx:id="registrationMessage" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+    </children>
+</GridPane>

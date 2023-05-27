@@ -12,7 +12,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(String name, String description, ArrayList<String> tags, LocalDate date) {
+    public Event(String name, String description, ArrayList<String> tags) {
         this.name = name;
         this.description = description;
         this.tags = tags;
