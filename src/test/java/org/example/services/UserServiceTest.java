@@ -48,19 +48,19 @@ public class UserServiceTest
     void emptyFieldTest()
     {
         assertThrows(NullFieldException.class, () -> {
-            UserService.addUser(null, "test", "test", "test", "test", "test");
+            UserService.addUser("", "test", "test", "test", "test", "test");
         });
         assertThrows(NullFieldException.class, () -> {
-            UserService.addUser("test", null, "test", "test", "test", "test");
+            UserService.addUser("test", "", "test", "test", "test", "test");
         });
         assertThrows(NullFieldException.class, () -> {
-            UserService.addUser("test", "test", null, "test", "test", "test");
+            UserService.addUser("test", "test", "", "test", "test", "test");
         });
         assertThrows(NullFieldException.class, () -> {
-            UserService.addUser("test", "test", "test", null, "test", "test");
+            UserService.addUser("test", "test", "test", "", "test", "test");
         });
         assertThrows(NullFieldException.class, () -> {
-            UserService.addUser("test", "test", "test", "test", null, "test");
+            UserService.addUser("test", "test", "test", "test", "", "test");
         });
         assertThrows(NullFieldException.class, () -> {
             UserService.addUser("test", "test", "test", "test", "test", null);

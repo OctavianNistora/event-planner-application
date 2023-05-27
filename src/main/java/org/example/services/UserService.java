@@ -41,7 +41,7 @@ public class UserService
     }
 
     public static void addUser(String firstName, String lastName, String email, String username, String password, String gender) throws UsernameAlreadyExistsException, NullFieldException {
-        if (firstName == null || lastName == null || email == null || username == null || password == null || gender == null)
+        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty() || gender == null)
         {
             throw new NullFieldException();
         }
