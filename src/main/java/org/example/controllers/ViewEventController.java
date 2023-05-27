@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -35,6 +36,12 @@ public class ViewEventController
     @FXML
     public void initialize()
     {
+        eventList.setItems(events);
+    }
+
+    public void refresh()
+    {
+        events = FXCollections.observableArrayList(EventService.getEvents());
         eventList.setItems(events);
     }
 
@@ -90,6 +97,18 @@ public class ViewEventController
 
     public void handleAddEvent()
     {
-        System.out.println("Add event");
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("add-event.fxml"));
+            stage.setScene(new Scene(loader.load(), 600, 400));
+            AddEventController controller = loader.getController();
+            controller.setParentController(this);
+            stage.setTitle("Add event");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(eventList.getScene().getWindow());
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

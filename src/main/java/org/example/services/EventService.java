@@ -23,12 +23,25 @@ public class EventService {
         eventRepository = database.getRepository(Event.class);
     }
 
-    public static void addEvent(String name, String description, ArrayList<String> tags, LocalDate date) throws IdenticalEventExistsException, NullFieldException {
-        if (name.isEmpty() || description.isEmpty())
+    public static void initTestingDatabase() {
+        database = Nitrite.builder()
+                .filePath(getPathToFile("testEvent.db").toFile())
+                .openOrCreate("test", "test");
+
+        eventRepository = database.getRepository(Event.class);
+    }
+
+    public static void closeDatabase() {
+        database.close();
+        eventRepository = null;
+    }
+
+    public static void addEvent(String name, String description, ArrayList<String> tags) throws IdenticalEventExistsException, NullFieldException {
+        if (name.isEmpty() || description.isEmpty() || tags.isEmpty())
         {
             throw new NullFieldException();
         }
-        Event event = new Event(name, description, tags, date);
+        Event event = new Event(name, description, tags);
         checkIdenticalEventExists(event);
         eventRepository.insert(event);
     }
